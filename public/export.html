@@ -14,7 +14,8 @@
       margin: 0;
       padding: 0;
       background-color: #f9fafb;
-      color: #111827;
+      color: #1A1F2C;
+      line-height: 1.5;
     }
     .container {
       max-width: 800px;
@@ -86,7 +87,7 @@
     .btn {
       display: inline-block;
       padding: 0.5rem 1rem;
-      background-color: #111827;
+      background-color: #0EA5E9;
       color: white;
       border: none;
       border-radius: 0.25rem;
@@ -97,7 +98,7 @@
       text-align: center;
     }
     .btn:hover {
-      background-color: #374151;
+      background-color: #0284c7;
     }
     .btn-full {
       width: 100%;
@@ -105,7 +106,7 @@
     .btn-outline {
       background-color: transparent;
       border: 1px solid #d1d5db;
-      color: #111827;
+      color: #1A1F2C;
     }
     .btn-outline:hover {
       background-color: #f3f4f6;
@@ -153,19 +154,23 @@
       margin-top: 1rem;
     }
     
-    /* Service Order Styles */
+    /* Service Order Styles - Improved */
     .service-order {
       background-color: white;
       padding: 2rem;
       border-radius: 0.5rem;
       box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
       display: none; /* Inicialmente oculto, será mostrado via JavaScript */
+      max-width: 800px;
+      margin: 0 auto;
     }
     .order-header {
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      margin-bottom: 1.5rem;
+      margin-bottom: 2rem;
+      border-bottom: 1px solid #e5e7eb;
+      padding-bottom: 1rem;
     }
     .order-logo {
       display: flex;
@@ -177,93 +182,141 @@
       width: auto;
     }
     .client-info {
-      margin-top: 1rem;
+      margin-top: 1.5rem;
       font-size: 0.875rem;
+      line-height: 1.7;
+      padding: 1rem;
+      background-color: #F1F0FB;
+      border-radius: 0.375rem;
+    }
+    .client-info p {
+      margin: 0.25rem 0;
     }
     .order-number {
       text-align: right;
       font-size: 0.875rem;
+      background-color: #F1F0FB;
+      padding: 0.75rem 1rem;
+      border-radius: 0.375rem;
+      min-width: 150px;
     }
     .order-number p:first-child {
       font-weight: 700;
       margin-bottom: 0.25rem;
+      color: #9b87f5;
     }
     .order-number .number {
       font-family: monospace;
+      font-size: 1.125rem;
+      letter-spacing: 0.05em;
     }
     .order-table {
       width: 100%;
-      border-collapse: collapse;
-      margin-bottom: 1.5rem;
+      border-collapse: separate;
+      border-spacing: 0;
+      margin-bottom: 2rem;
       border: 1px solid #e5e7eb;
       border-radius: 0.375rem;
       overflow: hidden;
     }
     .order-table th {
-      background-color: #f3f4f6;
+      background-color: #9b87f5;
+      color: white;
       text-align: left;
-      padding: 0.5rem 1rem;
+      padding: 0.75rem 1rem;
+      font-weight: 600;
     }
     .order-table td {
-      padding: 0.5rem 1rem;
+      padding: 0.75rem 1rem;
       border-top: 1px solid #e5e7eb;
     }
     .order-table tr:nth-child(even) {
-      background-color: #f9fafb;
+      background-color: #F1F0FB;
+    }
+    .validity-note {
+      text-align: center;
+      font-size: 0.875rem;
+      background-color: #F1F0FB;
+      color: #8E9196;
+      padding: 0.75rem;
+      border-radius: 0.375rem;
+      margin: 1.5rem 0;
     }
     .order-total {
       text-align: center;
       font-weight: 700;
-      font-size: 1.25rem;
-      margin: 1rem 0;
+      font-size: 1.5rem;
+      margin: 2rem 0;
+      color: #1A1F2C;
+      padding: 0.75rem;
+      background-color: #F1F0FB;
+      border-radius: 0.375rem;
     }
     .payment-info {
-      margin-bottom: 1.5rem;
+      margin: 1.5rem 0;
+      padding: 1rem;
+      background-color: #F1F0FB;
+      border-radius: 0.375rem;
+      text-align: center;
     }
     .footer-content {
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-      justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 1rem;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      margin: 2.5rem 0 1.5rem;
+      border-top: 1px solid #e5e7eb;
+      padding-top: 2rem;
     }
     .qr-section {
       text-align: center;
+      background-color: #F1F0FB;
+      padding: 1.5rem;
+      border-radius: 0.375rem;
     }
     .qr-section img {
       height: 8rem;
       width: auto;
-      margin: 0 auto;
+      margin: 0.75rem auto;
+      display: block;
     }
     .qr-section p {
       font-size: 0.875rem;
-      margin-top: 0.5rem;
+      margin-top: 0.75rem;
+      line-height: 1.6;
     }
     .contact-section {
-      text-align: right;
+      text-align: center;
+      background-color: #F1F0FB;
+      padding: 1.5rem;
+      border-radius: 0.375rem;
     }
     .contact-section p:first-child {
       font-weight: 700;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.75rem;
+      color: #9b87f5;
     }
     .contact-section .buttons {
       display: flex;
       gap: 1rem;
-      justify-content: flex-end;
+      justify-content: center;
       margin-top: 1.5rem;
     }
     .observations {
-      margin-top: 1rem;
+      margin-top: 1.5rem;
       border-top: 1px solid #e5e7eb;
-      padding-top: 1rem;
+      padding-top: 1.5rem;
+      background-color: #F1F0FB;
+      padding: 1rem;
+      border-radius: 0.375rem;
     }
     .observations h3 {
-      font-weight: 500;
-      margin-bottom: 0.5rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      color: #9b87f5;
     }
     .observations p {
       font-size: 0.875rem;
+      line-height: 1.6;
     }
     
     @media print {
@@ -277,12 +330,24 @@
       .service-order {
         box-shadow: none;
         padding: 0;
+        margin: 0;
+      }
+      body {
+        background-color: white;
+      }
+      .footer-content {
+        grid-template-columns: 1fr 1fr;
+      }
+      .qr-section, .contact-section, .client-info, .order-number,
+      .observations, .payment-info, .validity-note, .order-total {
+        background-color: white;
+        border: 1px solid #e5e7eb;
       }
     }
     
     @media (min-width: 768px) {
       .footer-content {
-        flex-direction: row;
+        grid-template-columns: 1fr 1fr;
       }
     }
     
@@ -295,16 +360,28 @@
     }
     
     .discount-row {
-      background-color: #f9fafb;
+      background-color: #F1F0FB;
     }
     .discount-row td:last-child {
       color: #dc2626;
+      font-weight: 500;
     }
     
     .empty-products {
       text-align: center;
       color: #6b7280;
       padding: 1.5rem 0;
+    }
+    
+    .title-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+    .title-row h2 {
+      margin: 0;
+      color: #1A1F2C;
     }
   </style>
 </head>
@@ -494,7 +571,7 @@
         <tbody id="services-table"></tbody>
       </table>
 
-      <div class="text-center text-sm">
+      <div class="validity-note">
         <p>Este orçamento é válido por apenas 15 dias,</p>
         <p>após o prazo do mesmo vencer será realizado um novo orçamento com valores atualizados.</p>
       </div>
@@ -507,7 +584,7 @@
 
       <div class="footer-content">
         <div class="qr-section">
-          <p style="margin-bottom: 0.5rem;">PAGUE ATRAVÉS DO NOSSO PIX:</p>
+          <p style="margin-bottom: 0.5rem; font-weight: 600;">PAGUE ATRAVÉS DO NOSSO PIX:</p>
           <img 
             src="https://i.ibb.co/M1B1mDL/Qr-Code-Pix-512x512.png" 
             alt="QR Code"
