@@ -1,0 +1,754 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Orçamento de Serviços - Creative Comunicações</title>
+  <style>
+    * { box-sizing: border-box; }
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f9fafb;
+      color: #111827;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      padding: 0.5rem 0;
+    }
+    header img {
+      height: 4rem;
+      width: auto;
+    }
+    h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin: 0;
+    }
+    @media (min-width: 640px) {
+      h1 {
+        font-size: 1.875rem;
+      }
+    }
+    .form-container {
+      background-color: white;
+      padding: 1.5rem;
+      border-radius: 0.5rem;
+      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    }
+    .form-group {
+      margin-bottom: 1rem;
+    }
+    label {
+      display: block;
+      font-size: 0.875rem;
+      font-weight: 500;
+      margin-bottom: 0.25rem;
+      color: #4b5563;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 0.5rem 0.75rem;
+      border: 1px solid #d1d5db;
+      border-radius: 0.25rem;
+      font-family: inherit;
+      font-size: 0.875rem;
+      transition: border-color 0.15s ease-in-out;
+    }
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: #9ca3af;
+      box-shadow: 0 0 0 3px rgba(156, 163, 175, 0.2);
+    }
+    .row {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+    @media (min-width: 640px) {
+      .row {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+    .btn {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      background-color: #111827;
+      color: white;
+      border: none;
+      border-radius: 0.25rem;
+      font-weight: 500;
+      font-size: 0.875rem;
+      cursor: pointer;
+      transition: background-color 0.15s ease-in-out;
+      text-align: center;
+    }
+    .btn:hover {
+      background-color: #374151;
+    }
+    .btn-full {
+      width: 100%;
+    }
+    .btn-outline {
+      background-color: transparent;
+      border: 1px solid #d1d5db;
+      color: #111827;
+    }
+    .btn-outline:hover {
+      background-color: #f3f4f6;
+    }
+    .space-y-4 > * + * {
+      margin-top: 1rem;
+    }
+    .product-list {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0;
+    }
+    .product-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.75rem;
+      background-color: #f9fafb;
+      border-radius: 0.375rem;
+      margin-bottom: 0.5rem;
+    }
+    .product-name {
+      flex-grow: 1;
+    }
+    .remove-btn {
+      background: transparent;
+      border: none;
+      color: #ef4444;
+      padding: 0.25rem;
+      border-radius: 9999px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.15s ease-in-out;
+    }
+    .remove-btn:hover {
+      background-color: #f3f4f6;
+    }
+    .total {
+      text-align: right;
+      font-weight: 700;
+      color: #047857;
+      font-size: 1.125rem;
+      margin-top: 1rem;
+    }
+    
+    /* Service Order Styles */
+    .service-order {
+      background-color: white;
+      padding: 2rem;
+      border-radius: 0.5rem;
+      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+      display: none;
+    }
+    .order-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1.5rem;
+    }
+    .order-logo {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .order-logo img {
+      height: 3rem;
+      width: auto;
+    }
+    .client-info {
+      margin-top: 1rem;
+      font-size: 0.875rem;
+    }
+    .order-number {
+      text-align: right;
+      font-size: 0.875rem;
+    }
+    .order-number p:first-child {
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+    }
+    .order-number .number {
+      font-family: monospace;
+    }
+    .order-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 1.5rem;
+      border: 1px solid #e5e7eb;
+      border-radius: 0.375rem;
+      overflow: hidden;
+    }
+    .order-table th {
+      background-color: #f3f4f6;
+      text-align: left;
+      padding: 0.5rem 1rem;
+    }
+    .order-table td {
+      padding: 0.5rem 1rem;
+      border-top: 1px solid #e5e7eb;
+    }
+    .order-table tr:nth-child(even) {
+      background-color: #f9fafb;
+    }
+    .order-total {
+      text-align: center;
+      font-weight: 700;
+      font-size: 1.25rem;
+      margin: 1rem 0;
+    }
+    .payment-info {
+      margin-bottom: 1.5rem;
+    }
+    .footer-content {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1rem;
+    }
+    .qr-section {
+      text-align: center;
+    }
+    .qr-section img {
+      height: 8rem;
+      width: auto;
+      margin: 0 auto;
+    }
+    .qr-section p {
+      font-size: 0.875rem;
+      margin-top: 0.5rem;
+    }
+    .contact-section {
+      text-align: right;
+    }
+    .contact-section p:first-child {
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    .contact-section .buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: flex-end;
+      margin-top: 1.5rem;
+    }
+    .observations {
+      margin-top: 1rem;
+      border-top: 1px solid #e5e7eb;
+      padding-top: 1rem;
+    }
+    .observations h3 {
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
+    .observations p {
+      font-size: 0.875rem;
+    }
+    
+    @media print {
+      .no-print {
+        display: none !important;
+      }
+      .container {
+        max-width: 100%;
+        padding: 0;
+      }
+      .service-order {
+        box-shadow: none;
+        padding: 0;
+      }
+    }
+    
+    @media (min-width: 768px) {
+      .footer-content {
+        flex-direction: row;
+      }
+    }
+    
+    .text-center {
+      text-align: center;
+    }
+    
+    .text-sm {
+      font-size: 0.875rem;
+    }
+    
+    .discount-row {
+      background-color: #f9fafb;
+    }
+    .discount-row td:last-child {
+      color: #dc2626;
+    }
+    
+    .empty-products {
+      text-align: center;
+      color: #6b7280;
+      padding: 1.5rem 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Quote Form -->
+    <div id="quote-form">
+      <header>
+        <img 
+          src="https://i.ibb.co/K07qbsY/LG-CREATIVE-512x512.png" 
+          alt="Logo Creative Comunicações"
+        />
+        <h1>ORÇAMENTO DE SERVIÇOS</h1>
+      </header>
+      
+      <div class="form-container">
+        <div class="space-y-4">
+          <div class="form-group">
+            <label for="name">Nome</label>
+            <input type="text" id="name" placeholder="Nome completo" required />
+          </div>
+          
+          <div class="row">
+            <div class="form-group">
+              <label for="date">Data</label>
+              <input type="date" id="date" required />
+            </div>
+            <div class="form-group">
+              <label for="document">CPF/CNPJ</label>
+              <input type="text" id="document" placeholder="000.000.000-00" required />
+            </div>
+          </div>
+          
+          <div class="row">
+            <div class="form-group">
+              <label for="phone">Telefone</label>
+              <input type="text" id="phone" placeholder="(00) 00000-0000" required />
+            </div>
+            <div class="form-group">
+              <label for="address">Endereço</label>
+              <input type="text" id="address" placeholder="Rua, número, bairro, cidade" required />
+            </div>
+          </div>
+          
+          <div class="row">
+            <div class="form-group">
+              <label for="payment">Forma de Pagamento</label>
+              <select id="payment">
+                <option value="PIX">PIX</option>
+                <option value="DINHEIRO">DINHEIRO</option>
+                <option value="CARTÃO">CARTÃO</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="installments">Parcelas</label>
+              <select id="installments">
+                <option value="1x">1x</option>
+                <option value="2x">2x</option>
+                <option value="3x">3x</option>
+                <option value="4x">4x</option>
+                <option value="5x">5x</option>
+                <option value="6x">6x</option>
+                <option value="7x">7x</option>
+                <option value="8x">8x</option>
+                <option value="9x">9x</option>
+                <option value="10x">10x</option>
+                <option value="11x">11x</option>
+                <option value="12x">12x</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        
+        <div style="margin-top: 1.5rem; border-top: 1px solid #e5e7eb; padding-top: 1.5rem;">
+          <h3 style="font-size: 1.125rem; font-weight: 500; margin-bottom: 1rem;">Adicionar produtos</h3>
+          
+          <div class="row">
+            <div class="form-group">
+              <label for="product">Produto</label>
+              <select id="product">
+                <option value="170">Cartão de Visita Verniz Total 250g FV 4x0 1.000un</option>
+                <option value="170">Cartão de Visita Verniz Total 300g FV 4x0 1.000un</option>
+                <option value="170">Cartão de Visita Verniz Total F 4x1 1.000un</option>
+                <option value="170">Cartão de Visita Verniz Localizado 250g FV 4x4 1.000un</option>
+                <option value="170">Cartão de Visita Verniz Localizado 300g FV 4x4 1.000un</option>
+                <option value="80">Adesivo Metro Quadrado Leitoso</option>
+                <option value="80">Adesivo Metro Quadrado Transparente</option>
+                <option value="20">Adesivo A4 Leitoso</option>
+                <option value="80">Lona Metro Quadrado</option>
+                <option value="300">Convite de Casamento Clássico 250un</option>
+                <option value="250">Papel Timbrado Sulfite 90g 4x0 500un</option>
+                <option value="10">Cardápio A4 4x0</option>
+                <option value="20">Cardápio A4 4x4</option>
+                <option value="15">Cardápio A3 4x0</option>
+                <option value="25">Cardápio A3 4x4</option>
+                <option value="20">Blocos 15x21 100Fls 4un</option>
+                <option value="25">Blocos 15x21 100Fls 8un</option>
+                <option value="28">Blocos 15x21 100Fls 12un</option>
+                <option value="30">Blocos 20x30 100Fls 4un</option>
+                <option value="35">Blocos 20x30 100Fls 8un</option>
+                <option value="38">Blocos 20x30 100Fls 12un</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="quantity">Quantidade</label>
+              <select id="quantity">
+                <option value="1">1un</option>
+                <option value="2">2un</option>
+                <option value="3">3un</option>
+                <option value="4">4un</option>
+                <option value="5">5un</option>
+              </select>
+            </div>
+          </div>
+          
+          <div class="row">
+            <div class="form-group">
+              <label for="finishing">Acabamento</label>
+              <select id="finishing">
+                <option>Sem Acabamento</option>
+                <option>Com Acabamento</option>
+                <option>Bordas Arredondadas</option>
+                <option>Com Ilhós</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="discount">Desconto (R$)</label>
+              <input type="number" id="discount" min="0" step="0.01" placeholder="0,00" />
+            </div>
+          </div>
+          
+          <button type="button" id="add-product-btn" class="btn btn-full" style="margin-bottom: 1.5rem;">
+            + Adicionar Produto
+          </button>
+          
+          <div id="products-container">
+            <div id="empty-products" class="empty-products">
+              <p>Nenhum produto adicionado ao orçamento</p>
+            </div>
+            <ul id="product-list" class="product-list"></ul>
+            
+            <div class="total">
+              VALOR TOTAL: R$<span id="total-price">0.00</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="form-group" style="margin-top: 1.5rem;">
+          <label for="observations">Observações Adicionais</label>
+          <textarea id="observations" rows="4" placeholder="Informações adicionais sobre o pedido..."></textarea>
+        </div>
+        
+        <button id="generate-quote-btn" type="button" class="btn btn-full" disabled>
+          Gerar Orçamento
+        </button>
+      </div>
+    </div>
+    
+    <!-- Service Order (initially hidden) -->
+    <div id="service-order" class="service-order">
+      <div class="order-header">
+        <div>
+          <div class="order-logo">
+            <img 
+              src="https://i.ibb.co/K07qbsY/LG-CREATIVE-512x512.png" 
+              alt="Logo" 
+            />
+            <h2 style="font-size: 1.25rem; font-weight: 700; margin: 0;">ORDEM DE SERVIÇOS</h2>
+          </div>
+          <div id="client-info" class="client-info"></div>
+        </div>
+        <div class="order-number">
+          <p>Nº Ordem</p>
+          <p id="order-number" class="number"></p>
+          <p id="order-date" style="margin-top: 0.5rem; font-size: 0.875rem;"></p>
+        </div>
+      </div>
+
+      <table class="order-table">
+        <thead>
+          <tr>
+            <th style="width: 20%;">Quant.</th>
+            <th>Descrição dos Serviços</th>
+            <th style="width: 28%; text-align: right;">Valor</th>
+          </tr>
+        </thead>
+        <tbody id="services-table"></tbody>
+      </table>
+
+      <div class="text-center text-sm">
+        <p>Este orçamento é válido por apenas 15 dias,</p>
+        <p>após o prazo do mesmo vencer será realizado um novo orçamento com valores atualizados.</p>
+      </div>
+
+      <h2 id="order-total" class="order-total">
+        VALOR TOTAL: R$0.00
+      </h2>
+      
+      <p id="payment-info" class="payment-info">O pagamento será realizado por: <strong id="payment-method">PIX</strong> em <strong id="payment-installments">1x</strong></p>
+
+      <div class="footer-content">
+        <div class="qr-section">
+          <p style="margin-bottom: 0.5rem;">PAGUE ATRAVÉS DO NOSSO PIX:</p>
+          <img 
+            src="https://i.ibb.co/M1B1mDL/Qr-Code-Pix-512x512.png" 
+            alt="QR Code"
+          />
+          <p>
+            Assim que o pagamento for<br />
+            confirmado iniciaremos<br />
+            a produção do seu material.
+          </p>
+        </div>
+        
+        <div class="contact-section">
+          <p>Dúvidas:</p>
+          <p><strong>62 9 9873-7170</strong></p>
+          <p>@creative.comunicacoes</p>
+          <p>www.creativecomunicacoes.com.br</p>
+          
+          <div class="buttons no-print">
+            <button id="back-btn" type="button" class="btn btn-outline">
+              Voltar ao formulário
+            </button>
+            <button id="print-btn" type="button" class="btn">
+              🖨️ Imprimir
+            </button>
+          </div>
+        </div>
+      </div>
+      
+      <div id="observations-section" class="observations" style="display: none;">
+        <h3>Observações:</h3>
+        <p id="observations-text"></p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // Set default date to today
+      const today = new Date().toISOString().split('T')[0];
+      document.getElementById("date").value = today;
+      
+      // Variables to manage state
+      let products = [];
+      let discount = 0;
+      let total = 0;
+      
+      // DOM Elements
+      const addProductBtn = document.getElementById("add-product-btn");
+      const productSelect = document.getElementById("product");
+      const quantitySelect = document.getElementById("quantity");
+      const productList = document.getElementById("product-list");
+      const emptyProducts = document.getElementById("empty-products");
+      const totalPrice = document.getElementById("total-price");
+      const discountInput = document.getElementById("discount");
+      const generateQuoteBtn = document.getElementById("generate-quote-btn");
+      const quoteForm = document.getElementById("quote-form");
+      const serviceOrder = document.getElementById("service-order");
+      const backBtn = document.getElementById("back-btn");
+      const printBtn = document.getElementById("print-btn");
+      
+      // Initialize product ID counter
+      let nextProductId = 1;
+      
+      // Add product to list
+      addProductBtn.addEventListener("click", function() {
+        const productOption = productSelect.options[productSelect.selectedIndex];
+        const productName = productOption.text;
+        const productPrice = parseFloat(productOption.value);
+        const quantity = parseInt(quantitySelect.value);
+        const productTotal = productPrice * quantity;
+        
+        // Create product object
+        const product = {
+          id: nextProductId++,
+          name: productName,
+          price: productPrice,
+          quantity: quantity,
+          total: productTotal
+        };
+        
+        // Add to products array
+        products.push(product);
+        
+        // Update UI
+        updateProductsList();
+        updateTotal();
+      });
+      
+      // Remove product from list
+      function removeProduct(id) {
+        products = products.filter(product => product.id !== id);
+        updateProductsList();
+        updateTotal();
+      }
+      
+      // Update products list UI
+      function updateProductsList() {
+        productList.innerHTML = "";
+        
+        if (products.length === 0) {
+          emptyProducts.style.display = "block";
+          generateQuoteBtn.disabled = true;
+        } else {
+          emptyProducts.style.display = "none";
+          generateQuoteBtn.disabled = false;
+          
+          products.forEach(product => {
+            const li = document.createElement("li");
+            li.className = "product-item";
+            
+            li.innerHTML = `
+              <span class="product-name">${product.name} - ${product.quantity}un - R$${product.total.toFixed(2)}</span>
+              <button class="remove-btn" type="button" aria-label="Remover produto">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M3 6h18"></path>
+                  <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path>
+                  <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path>
+                </svg>
+              </button>
+            `;
+            
+            const removeBtn = li.querySelector(".remove-btn");
+            removeBtn.addEventListener("click", function() {
+              removeProduct(product.id);
+            });
+            
+            productList.appendChild(li);
+          });
+        }
+      }
+      
+      // Update total price
+      function updateTotal() {
+        discount = parseFloat(discountInput.value) || 0;
+        total = products.reduce((sum, product) => sum + product.total, 0);
+        const finalTotal = Math.max(0, total - discount);
+        totalPrice.textContent = finalTotal.toFixed(2);
+      }
+      
+      // Listen for discount changes
+      discountInput.addEventListener("input", updateTotal);
+      
+      // Generate quote and show service order
+      generateQuoteBtn.addEventListener("click", function() {
+        // Get form values
+        const name = document.getElementById("name").value;
+        const date = document.getElementById("date").value;
+        const document = document.getElementById("document").value;
+        const phone = document.getElementById("phone").value;
+        const address = document.getElementById("address").value;
+        const paymentMethod = document.getElementById("payment").value;
+        const installments = document.getElementById("installments").value;
+        const observations = document.getElementById("observations").value;
+        
+        // Validate required fields
+        if (!name || !date || !document || !phone || !address) {
+          alert("Por favor, preencha todos os campos obrigatórios.");
+          return;
+        }
+        
+        // Format the order number
+        const orderNumber = `#${String(Math.floor(Math.random() * 100000)).padStart(5, '0')}`;
+        
+        // Update client info
+        document.getElementById("client-info").innerHTML = `
+          <p><strong>Nome:</strong> ${name}</p>
+          <p><strong>CPF/CNPJ:</strong> ${document}</p>
+          <p><strong>Endereço:</strong> ${address}</p>
+          <p><strong>Telefone:</strong> ${phone}</p>
+        `;
+        
+        // Update order number and date
+        document.getElementById("order-number").textContent = orderNumber;
+        document.getElementById("order-date").textContent = `Data: ${new Date(date).toLocaleDateString('pt-BR')}`;
+        
+        // Update services table
+        const servicesTable = document.getElementById("services-table");
+        servicesTable.innerHTML = "";
+        
+        products.forEach((product, index) => {
+          const row = document.createElement("tr");
+          row.className = index % 2 === 0 ? "" : "bg-gray-50";
+          
+          row.innerHTML = `
+            <td>${product.quantity}un</td>
+            <td>${product.name}</td>
+            <td style="text-align: right;">R$${product.total.toFixed(2)}</td>
+          `;
+          
+          servicesTable.appendChild(row);
+        });
+        
+        // Add discount row if applicable
+        if (discount > 0) {
+          const discountRow = document.createElement("tr");
+          discountRow.className = "discount-row";
+          
+          discountRow.innerHTML = `
+            <td></td>
+            <td style="font-weight: 500;">Desconto</td>
+            <td style="text-align: right;">-R$${discount.toFixed(2)}</td>
+          `;
+          
+          servicesTable.appendChild(discountRow);
+        }
+        
+        // Update total
+        const finalTotal = Math.max(0, total - discount);
+        document.getElementById("order-total").textContent = `VALOR TOTAL: R$${finalTotal.toFixed(2)}`;
+        
+        // Update payment info
+        document.getElementById("payment-method").textContent = paymentMethod;
+        document.getElementById("payment-installments").textContent = installments;
+        
+        // Show observations if available
+        const observationsSection = document.getElementById("observations-section");
+        const observationsText = document.getElementById("observations-text");
+        
+        if (observations.trim()) {
+          observationsSection.style.display = "block";
+          observationsText.textContent = observations;
+        } else {
+          observationsSection.style.display = "none";
+        }
+        
+        // Show service order, hide quote form
+        quoteForm.style.display = "none";
+        serviceOrder.style.display = "block";
+      });
+      
+      // Back button
+      backBtn.addEventListener("click", function() {
+        serviceOrder.style.display = "none";
+        quoteForm.style.display = "block";
+      });
+      
+      // Print button
+      printBtn.addEventListener("click", function() {
+        window.print();
+      });
+    });
+  </script>
+</body>
+</html>
