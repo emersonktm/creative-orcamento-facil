@@ -159,7 +159,7 @@
       padding: 2rem;
       border-radius: 0.5rem;
       box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-      display: none;
+      display: none; /* Inicialmente oculto, será mostrado via JavaScript */
     }
     .order-header {
       display: flex;
@@ -655,7 +655,7 @@
         // Get form values
         const name = document.getElementById("name").value;
         const date = document.getElementById("date").value;
-        const document = document.getElementById("document").value;
+        const documentValue = document.getElementById("document").value;
         const phone = document.getElementById("phone").value;
         const address = document.getElementById("address").value;
         const paymentMethod = document.getElementById("payment").value;
@@ -663,7 +663,7 @@
         const observations = document.getElementById("observations").value;
         
         // Validate required fields
-        if (!name || !date || !document || !phone || !address) {
+        if (!name || !date || !documentValue || !phone || !address) {
           alert("Por favor, preencha todos os campos obrigatórios.");
           return;
         }
@@ -674,7 +674,7 @@
         // Update client info
         document.getElementById("client-info").innerHTML = `
           <p><strong>Nome:</strong> ${name}</p>
-          <p><strong>CPF/CNPJ:</strong> ${document}</p>
+          <p><strong>CPF/CNPJ:</strong> ${documentValue}</p>
           <p><strong>Endereço:</strong> ${address}</p>
           <p><strong>Telefone:</strong> ${phone}</p>
         `;
