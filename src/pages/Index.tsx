@@ -1,11 +1,36 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import React, { useState } from 'react';
+import Header from '../components/Header';
+import QuoteForm from '../components/QuoteForm';
+import ServiceOrder from '../components/ServiceOrder';
+import { QuoteData } from '../types/types';
 
 const Index = () => {
+  const [showQuoteForm, setShowQuoteForm] = useState(true);
+  const [quoteData, setQuoteData] = useState<QuoteData | null>(null);
+
+  const handleQuoteSubmit = (data: QuoteData) => {
+    setQuoteData(data);
+    setShowQuoteForm(false);
+  };
+
+  const handleBack = () => {
+    setShowQuoteForm(true);
+  };
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
+    <div className="min-h-screen bg-gray-50">
+      <div className="container mx-auto px-4 py-8 max-w-3xl">
+        {showQuoteForm ? (
+          <>
+            <Header title="ORÇAMENTO DE SERVIÇOS" />
+            <div className="bg-white p-6 rounded-lg shadow-md">
+              <QuoteForm onSubmit={handleQuoteSubmit} />
+            </div>
+          </>
+        ) : (
+          quoteData && <ServiceOrder quoteData={quoteData} onBack={handleBack} />
+        )}
       </div>
     </div>
   );
