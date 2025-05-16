@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -148,7 +147,10 @@ const QuoteForm: React.FC<QuoteFormProps> = ({ onSubmit }) => {
       orderNumber
     };
     
-    onSubmit(quoteData);
+    // Ensure we have at least one product before submitting
+    if (products.length > 0) {
+      onSubmit(quoteData);
+    }
   };
 
   return (

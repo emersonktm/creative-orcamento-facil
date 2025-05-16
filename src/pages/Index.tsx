@@ -10,6 +10,7 @@ const Index = () => {
   const [quoteData, setQuoteData] = useState<QuoteData | null>(null);
 
   const handleQuoteSubmit = (data: QuoteData) => {
+    console.log("Form submitted, switching to service order view", data);
     setQuoteData(data);
     setShowQuoteForm(false);
   };
